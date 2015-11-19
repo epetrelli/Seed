@@ -7,9 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-/**
- * Created by enrico on 19/11/15.
- */
+
 @Path("/heartbeat")
 public class Heartbeat {
 
