@@ -1,7 +1,9 @@
 package it.wirge.rest.endpoints;
 
+import it.wirge.data.dao.SeedDao;
 import it.wirge.rest.models.Beat;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
