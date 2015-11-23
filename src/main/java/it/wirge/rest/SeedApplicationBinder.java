@@ -8,9 +8,6 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import javax.inject.Singleton;
 
-/**
- * Created by enrico on 19/11/15.
- */
 public class SeedApplicationBinder  extends AbstractBinder {
     @Override
     protected void configure() {
@@ -19,5 +16,6 @@ public class SeedApplicationBinder  extends AbstractBinder {
 
         // dao's
         bind(SeedDao.class).to(ISeedDao.class).in(Singleton.class);
+
     }
 }

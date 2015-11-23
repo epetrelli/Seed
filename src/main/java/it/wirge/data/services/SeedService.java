@@ -1,7 +1,6 @@
 package it.wirge.data.services;
 
 import it.wirge.data.dao.ISeedDao;
-import it.wirge.data.dao.SeedDao;
 import it.wirge.data.entities.SeedEntity;
 import it.wirge.rest.models.Seed;
 
@@ -9,9 +8,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.logging.Logger;
 
-/**
- * Created by enrico on 20/11/15.
- */
 @Singleton
 public class SeedService implements ISeedService {
 
@@ -24,8 +20,7 @@ public class SeedService implements ISeedService {
     public Seed getSeed(int idSeed) {
         logger.info("getSeedEntity(" + idSeed + ")");
         SeedEntity seedEntity = seedDao.getSeedEntity(idSeed);
-        Seed seed = entityToObject(seedEntity);
-        return seed;
+        return entityToObject(seedEntity);
     }
     @Override
     public void saveSeed(Seed seed) {
@@ -42,13 +37,13 @@ public class SeedService implements ISeedService {
 
     // Utilities / Business logic:
 
-    private Seed entityToObject(SeedEntity seedEntity){
+    public static Seed entityToObject(SeedEntity seedEntity){
         Seed seed = new Seed();
         seed.setIdSeed(seedEntity.getIdSeed());
         seed.setTxSeed(seedEntity.getTxSeed());
         return seed;
     }
-    private SeedEntity objectToEntity(Seed seed){
+    public static SeedEntity objectToEntity(Seed seed){
         SeedEntity seedEntity = new SeedEntity();
         seedEntity.setIdSeed(seed.getIdSeed());
         seedEntity.setTxSeed(seed.getTxSeed());
