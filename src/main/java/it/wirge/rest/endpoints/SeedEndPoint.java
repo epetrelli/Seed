@@ -1,8 +1,7 @@
 package it.wirge.rest.endpoints;
 
-import it.wirge.data.entities.Seed;
 import it.wirge.data.services.ISeedService;
-import it.wirge.data.services.SeedService;
+import it.wirge.rest.models.Seed;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

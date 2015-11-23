@@ -1,14 +1,14 @@
 package it.wirge.data.dao;
 
-import it.wirge.data.entities.Seed;
+import it.wirge.data.entities.SeedEntity;
 
 /**
  * Created by enrico on 20/11/15.
  */
 public interface ISeedDao {
-    Seed getSeed(int idSeed);
+    SeedEntity getSeedEntity(int idSeed);
 
-    void saveSeed(Seed seed);
+    void saveSeedEntity(SeedEntity seedEntity);
 
-    void deleteSeed(Seed seed);
+    void deleteSeedEntity(SeedEntity seedEntity);
 }

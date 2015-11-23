@@ -6,13 +6,13 @@
 	<persistence-unit name="SeedPersistenceUnit" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<mapping-file>it/wirge/data/entities/Seed.xml</mapping-file>
-		<class>it.wirge.data.entities.Seed</class>
+		<mapping-file>it/wirge/data/entities/SeedEntity.xml</mapping-file>
+		<class>it.wirge.data.entities.SeedEntity</class>
 
-	    <properties>
+		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/SeedDB" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="kikkokikko" />
+			<property name="javax.persistence.jdbc.password" value="Mulinetti5" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

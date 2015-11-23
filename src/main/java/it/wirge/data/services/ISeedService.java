@@ -1,6 +1,6 @@
 package it.wirge.data.services;
 
-import it.wirge.data.entities.Seed;
+import it.wirge.rest.models.Seed;
 
 /**
  * Created by enrico on 20/11/15.

@@ -1,15 +1,13 @@
 package it.wirge.data.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * Created by enrico on 20/11/15.
+ * Created by enricopetrelli on 20/11/15.
  */
 @Entity
-public class Seed {
+@Table(name = "seed", schema = "", catalog = "SeedDB")
+public class SeedEntity {
     private Integer idSeed;
     private String txSeed;
 
@@ -38,10 +36,10 @@ public class Seed {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Seed seed = (Seed) o;
+        SeedEntity that = (SeedEntity) o;
 
-        if (idSeed != null ? !idSeed.equals(seed.idSeed) : seed.idSeed != null) return false;
-        if (txSeed != null ? !txSeed.equals(seed.txSeed) : seed.txSeed != null) return false;
+        if (idSeed != null ? !idSeed.equals(that.idSeed) : that.idSeed != null) return false;
+        if (txSeed != null ? !txSeed.equals(that.txSeed) : that.txSeed != null) return false;
 
         return true;
     }

@@ -1,6 +1,6 @@
 package it.wirge.data.dao;
 
-import it.wirge.data.entities.Seed;
+import it.wirge.data.entities.SeedEntity;
 
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
@@ -19,23 +19,23 @@ public class SeedDao implements ISeedDao {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("SeedPersistenceUnit");
 
     @Override
-    public Seed getSeed(int idSeed) {
-        logger.info("getSeed(" + idSeed + ")");
+    public SeedEntity getSeedEntity(int idSeed) {
+        logger.info("getSeedEntity(" + idSeed + ")");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Seed seed = null;
+        SeedEntity seedEntity = null;
         try {
-            seed = entityManager.find(Seed.class, idSeed);
+            seedEntity = entityManager.find(SeedEntity.class, idSeed);
         } finally {
             entityManager.close();
         }
-        return seed;
+        return seedEntity;
     }
     @Override
-    public void saveSeed(Seed seed) {
-        logger.info("saveSeed(" + seed.getIdSeed() + ")");
+    public void saveSeedEntity(SeedEntity seedEntity) {
+        logger.info("saveSeed(" + seedEntity.getIdSeed() + ")");
     }
     @Override
-    public void deleteSeed(Seed seed) {
-        logger.info("deleteSeed(" + seed.getIdSeed() + ")");
+    public void deleteSeedEntity(SeedEntity seedEntity) {
+        logger.info("deleteSeed(" + seedEntity.getIdSeed() + ")");
     }
 }
