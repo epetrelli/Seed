@@ -16,7 +16,7 @@ public class SeedDao implements ISeedDao {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("SeedPersistenceUnit");
 
     @Override
-    public SeedEntity getSeedEntity(int idSeed) {
+    public SeedEntity getSeedEntity(Long idSeed) {
         logger.info("getSeedEntity(" + idSeed + ")");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         SeedEntity seedEntity = null;
@@ -29,7 +29,7 @@ public class SeedDao implements ISeedDao {
     }
     @Override
     public SeedEntity insertSeedEntity(SeedEntity seedEntity) throws Exception {
-        logger.info("saveSeed(" + seedEntity.getIdSeed() + ")");
+        logger.info("insertSeedEntity(" + seedEntity.getIdSeed() + ")");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         try {
@@ -49,11 +49,12 @@ public class SeedDao implements ISeedDao {
     @Override
     public SeedEntity saveSeedEntity(SeedEntity seedEntity) throws Exception {
         logger.info("saveSeed(" + seedEntity.getIdSeed() + ")");
+        SeedEntity seedEntityOut;
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         try {
             entityTransaction.begin();
-            entityManager.merge(seedEntity);
+            seedEntityOut = entityManager.merge(seedEntity);
             entityTransaction.commit();
         }
         catch (Exception e) {
@@ -63,7 +64,7 @@ public class SeedDao implements ISeedDao {
         finally {
             entityManager.close();
         }
-        return seedEntity;
+        return seedEntityOut;
     }
     @Override
     public void deleteSeedEntity(SeedEntity seedEntity) throws Exception {
@@ -72,6 +73,12 @@ public class SeedDao implements ISeedDao {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         try {
             entityTransaction.begin();
+            if(!entityManager.contains(seedEntity)){
+                seedEntity = entityManager.merge(seedEntity);
+            }
+//            else{
+//                seedEntity = entityManager.find(SeedEntity.class, seedEntity.getIdSeed());
+//            }
             entityManager.remove(seedEntity);
             entityTransaction.commit();
         }

@@ -1,17 +1,19 @@
 package it.wirge.rest.endpoints;
 
+import io.swagger.annotations.*;
 import it.wirge.data.services.ISeedService;
 import it.wirge.rest.models.Seed;
 import org.glassfish.jersey.process.internal.RequestScoped;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.ws.http.HTTPException;
 import java.util.logging.Logger;
 
 @RequestScoped
+@Api(value = "Seed endpoint")
 @Path("/seed")
 public class SeedEndPoint {
 
@@ -27,53 +29,84 @@ public class SeedEndPoint {
     @GET
     @Path(value = "{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Seed getSeed(@PathParam("id") int idSeed) {
+    @ApiOperation(value = "Finds a Seed by id", response = Seed.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Seed not found"),
+            @ApiResponse(code = 500, message = "An error has occurred")
+    })
+    public Seed getSeed(
+            @ApiParam( value = "Seed id (db.seed.idSeed)", required = true )
+            @PathParam("id") Long idSeed) {
         logger.info("getSeed(" + idSeed + ")");
         Seed seed = seedService.getSeed(idSeed);
-        if(seed!=null)
-            return seedService.getSeed(idSeed);
+        if (seed != null)
+            return seed;
         else
             throw new WebApplicationException(Response.Status.NOT_FOUND.getStatusCode());
     }
 
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteSeed(Seed seed) {
-        logger.info("deleteSeed(" + seed.getIdSeed() + ")");
+    @Path(value = "{id}")
+    @ApiOperation(value = "Deletes a seed")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Seed not found"),
+            @ApiResponse(code = 500, message = "An error has occurred")
+    })
+    public void deleteSeed(@ApiParam( value = "Seed id (db.seed.idSeed)", required = true )
+                                   @PathParam("id") Long idSeed) {
+        logger.info("deleteSeed(" + idSeed + ")");
+        Seed seed = seedService.getSeed(idSeed);
+
+        if(seed==null) {
+            logger.info("Seed " + idSeed + " not found");
+            throw new WebApplicationException(HttpServletResponse.SC_NOT_FOUND);
+        }
+
         try {
             seedService.deleteSeed(seed);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            throw new WebApplicationException(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-        return Response.status(Response.Status.OK).entity("Seed has been successfully deleted").type(MediaType.APPLICATION_JSON).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Seed insertSeed(Seed seed){
+    @ApiOperation(value = "Creates a new Seed", response = Seed.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Seed not found"),
+            @ApiResponse(code = 500, message = "An error has occurred")
+    })
+    public Seed insertSeed(Seed seed) {
         logger.info("saveSeed(" + seed.getIdSeed() + ")");
+        Seed seedOut;
         try {
-            seedService.insertSeed(seed);
+            seedOut = seedService.insertSeed(seed);
         } catch (Exception e) {
             e.printStackTrace();
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
-        return seed;
+        return seedOut;
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Seed saveSeed(Seed seed){
+    @ApiOperation(value = "Saves a new seed", response = Seed.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "Seed not found"),
+            @ApiResponse(code = 500, message = "An error has occurred")
+    })
+    public Seed saveSeed(Seed seed) {
         logger.info("saveSeed(" + seed.getIdSeed() + ")");
+        Seed seedOut;
         try {
-            seedService.saveSeed(seed);
+            seedOut = seedService.saveSeed(seed);
         } catch (Exception e) {
             e.printStackTrace();
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
         }
-        return seed;
+        return seedOut;
     }
 }

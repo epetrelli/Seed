@@ -2,11 +2,9 @@ package it.wirge.data.dao;
 
 import it.wirge.data.entities.SeedEntity;
 
-/**
- * Created by enrico on 20/11/15.
- */
+
 public interface ISeedDao {
-    SeedEntity getSeedEntity(int idSeed);
+    SeedEntity getSeedEntity(Long idSeed);
 
     SeedEntity insertSeedEntity(SeedEntity seedEntity) throws Exception;
 

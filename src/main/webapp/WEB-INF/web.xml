@@ -9,6 +9,7 @@
     </welcome-file-list>
 
     <error-page>
+        <error-code>404</error-code>
         <location>/error404.html</location>
     </error-page>
 
@@ -35,5 +36,18 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 -->
+    <servlet>
+        <servlet-name>Jersey2Config</servlet-name>
+        <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.0.0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:8080/api</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
 
 </web-app>

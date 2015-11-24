@@ -48,6 +48,13 @@
             <version>${jersey.version}</version>
         </dependency>
 
+        <!-- swagger -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jersey2-jaxrs</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
         <!-- jpa -->
         <dependency>
             <groupId>javax.persistence</groupId>
@@ -96,6 +103,7 @@
         </resources>
 
         <plugins>
+            <!-- here just in case I have to clean something else, actually used with defaults -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -103,4 +111,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

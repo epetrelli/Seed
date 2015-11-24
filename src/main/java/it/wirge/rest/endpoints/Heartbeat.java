@@ -1,17 +1,16 @@
 package it.wirge.rest.endpoints;
 
-import it.wirge.data.dao.SeedDao;
+import io.swagger.annotations.Api;
 import it.wirge.rest.models.Beat;
 
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
-
 @Path("/heartbeat")
+@Api
 public class Heartbeat {
 
     Logger logger = Logger.getLogger(this.getClass().getName());

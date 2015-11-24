@@ -17,8 +17,8 @@ public class SeedService implements ISeedService {
     private ISeedDao seedDao;
 
     @Override
-    public Seed getSeed(int idSeed) {
-        logger.info("getSeedEntity(" + idSeed + ")");
+    public Seed getSeed(Long idSeed) {
+        logger.info("getSeed(" + idSeed + ")");
         SeedEntity seedEntity = seedDao.getSeedEntity(idSeed);
         return entityToObject(seedEntity);
     }
@@ -27,6 +27,8 @@ public class SeedService implements ISeedService {
         logger.info("insertSeed(" + "" + ")");
         SeedEntity seedEntity = objectToEntity(seed);
         SeedEntity seedEntityOut = seedDao.insertSeedEntity(seedEntity);
+        logger.info("persisted3: " + seedEntityOut.getIdSeed());
+
         return entityToObject(seedEntityOut);
     }
     @Override
