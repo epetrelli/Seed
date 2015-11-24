@@ -27,7 +27,7 @@ public class SeedServiceTest {
         //logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + "" + ")");
         SeedEntity seedEntity = new SeedEntity();
         Random r = new Random();
-        seedEntity.setIdSeed(r.nextInt());
+        seedEntity.setIdSeed(new Long(r.nextInt()));
         seedEntity.setTxSeed("*" + System.currentTimeMillis() + "*");
         Seed seed = SeedService.entityToObject(seedEntity);
         assert seed.getIdSeed().equals(seedEntity.getIdSeed());
@@ -39,7 +39,7 @@ public class SeedServiceTest {
         //logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + "" + ")");
         Seed seed = new Seed();
         Random r = new Random();
-        seed.setIdSeed(r.nextInt());
+        seed.setIdSeed(new Long(r.nextInt()));
         seed.setTxSeed("*" + System.currentTimeMillis() + "*");
         SeedEntity seedEntity = SeedService.objectToEntity(seed);
         assert seed.getIdSeed().equals(seedEntity.getIdSeed());

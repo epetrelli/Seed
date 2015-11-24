@@ -8,7 +8,9 @@ import it.wirge.data.entities.SeedEntity;
 public interface ISeedDao {
     SeedEntity getSeedEntity(int idSeed);
 
-    void saveSeedEntity(SeedEntity seedEntity);
+    SeedEntity insertSeedEntity(SeedEntity seedEntity) throws Exception;
 
-    void deleteSeedEntity(SeedEntity seedEntity);
+    SeedEntity saveSeedEntity(SeedEntity seedEntity) throws Exception;
+
+    void deleteSeedEntity(SeedEntity seedEntity) throws Exception;
 }

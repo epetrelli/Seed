@@ -2,20 +2,17 @@ package it.wirge.data.dao;
 
 import it.wirge.data.entities.SeedEntity;
 
-import javax.inject.Singleton;
+import javax.annotation.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.logging.Logger;
 
-/**
- * Created by enrico on 19/11/15.
- */
-
-@Singleton
+@ManagedBean
 public class SeedDao implements ISeedDao {
 
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger = Logger.getLogger(ISeedDao.class.getName());
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("SeedPersistenceUnit");
 
     @Override
@@ -31,11 +28,59 @@ public class SeedDao implements ISeedDao {
         return seedEntity;
     }
     @Override
-    public void saveSeedEntity(SeedEntity seedEntity) {
+    public SeedEntity insertSeedEntity(SeedEntity seedEntity) throws Exception {
         logger.info("saveSeed(" + seedEntity.getIdSeed() + ")");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        try {
+            entityTransaction.begin();
+            entityManager.persist(seedEntity);
+            entityTransaction.commit();
+        }
+        catch (Exception e) {
+            entityTransaction.rollback();
+            throw e;
+        }
+        finally {
+            entityManager.close();
+        }
+        return seedEntity;
     }
     @Override
-    public void deleteSeedEntity(SeedEntity seedEntity) {
+    public SeedEntity saveSeedEntity(SeedEntity seedEntity) throws Exception {
+        logger.info("saveSeed(" + seedEntity.getIdSeed() + ")");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        try {
+            entityTransaction.begin();
+            entityManager.merge(seedEntity);
+            entityTransaction.commit();
+        }
+        catch (Exception e) {
+            entityTransaction.rollback();
+            throw e;
+        }
+        finally {
+            entityManager.close();
+        }
+        return seedEntity;
+    }
+    @Override
+    public void deleteSeedEntity(SeedEntity seedEntity) throws Exception {
         logger.info("deleteSeed(" + seedEntity.getIdSeed() + ")");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        try {
+            entityTransaction.begin();
+            entityManager.remove(seedEntity);
+            entityTransaction.commit();
+        }
+        catch (Exception e) {
+            entityTransaction.rollback();
+            throw e;
+        }
+        finally {
+            entityManager.close();
+        }
     }
 }

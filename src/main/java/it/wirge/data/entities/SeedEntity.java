@@ -1,28 +1,20 @@
 package it.wirge.data.entities;
 
-import javax.persistence.*;
-
 /**
- * Created by enricopetrelli on 20/11/15.
+ * Created by enrico on 24/11/15.
  */
-@Entity
-@Table(name = "seed", schema = "", catalog = "SeedDB")
 public class SeedEntity {
-    private Integer idSeed;
+    private Long idSeed;
     private String txSeed;
 
-    @Id
-    @Column(name = "idSeed", nullable = false, insertable = true, updatable = true)
-    public Integer getIdSeed() {
+    public Long getIdSeed() {
         return idSeed;
     }
 
-    public void setIdSeed(Integer idSeed) {
+    public void setIdSeed(Long idSeed) {
         this.idSeed = idSeed;
     }
 
-    @Basic
-    @Column(name = "txSeed", nullable = true, insertable = true, updatable = true, length = 256)
     public String getTxSeed() {
         return txSeed;
     }
@@ -49,5 +41,15 @@ public class SeedEntity {
         int result = idSeed != null ? idSeed.hashCode() : 0;
         result = 31 * result + (txSeed != null ? txSeed.hashCode() : 0);
         return result;
+    }
+
+    private String version;
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

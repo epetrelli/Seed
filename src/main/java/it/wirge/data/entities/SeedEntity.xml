@@ -6,11 +6,13 @@
                 <table name="seed" schema="" catalog="SeedDB"/>
                 <attributes>
                         <id name="idSeed">
-                                <column name="idSeed" nullable="false" precision="10"/>
+                                <column name="idSeed" nullable="false" precision="19"/>
+
                         </id>
                         <basic name="txSeed">
-                                <column name="txSeed" length="256"/>
+                                <column name="txSeed" length="45"/>
                         </basic>
+                        <version name="version"/>
                 </attributes>
         </entity>
 </entity-mappings>

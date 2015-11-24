@@ -8,7 +8,9 @@ import it.wirge.rest.models.Seed;
 public interface ISeedService {
     Seed getSeed(int idSeed);
 
-    void saveSeed(Seed seed);
+    Seed insertSeed(Seed seed) throws Exception;
 
-    void deleteSeed(Seed seed);
+    Seed saveSeed(Seed seed) throws Exception;
+
+    void deleteSeed(Seed seed) throws Exception;
 }

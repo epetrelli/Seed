@@ -1,14 +1,14 @@
 package it.wirge.rest.models;
 
 public class Seed {
-    private Integer idSeed;
+    private Long idSeed;
     private String txSeed;
 
-    public Integer getIdSeed() {
+    public Long getIdSeed() {
         return idSeed;
     }
 
-    public void setIdSeed(Integer idSeed) {
+    public void setIdSeed(Long idSeed) {
         this.idSeed = idSeed;
     }
 
