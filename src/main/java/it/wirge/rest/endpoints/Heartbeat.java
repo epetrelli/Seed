@@ -1,6 +1,7 @@
 package it.wirge.rest.endpoints;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import it.wirge.rest.models.Beat;
 
 import javax.ws.rs.GET;
@@ -10,13 +11,14 @@ import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
 @Path("/heartbeat")
-@Api
+@Api(value = "HeartBeat to test api availability")
 public class Heartbeat {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Returns a beat containing current server time", response = Beat.class)
     public Beat getHeartbeat() {
         logger.info("getHeartbeat()");
         Beat beat = new Beat();

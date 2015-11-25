@@ -27,6 +27,7 @@ public class SeedDao implements ISeedDao {
         }
         return seedEntity;
     }
+
     @Override
     public SeedEntity insertSeedEntity(SeedEntity seedEntity) throws Exception {
         logger.info("insertSeedEntity(" + seedEntity.getIdSeed() + ")");
@@ -46,6 +47,7 @@ public class SeedDao implements ISeedDao {
         }
         return seedEntity;
     }
+
     @Override
     public SeedEntity saveSeedEntity(SeedEntity seedEntity) throws Exception {
         logger.info("saveSeed(" + seedEntity.getIdSeed() + ")");
@@ -66,6 +68,7 @@ public class SeedDao implements ISeedDao {
         }
         return seedEntityOut;
     }
+
     @Override
     public void deleteSeedEntity(SeedEntity seedEntity) throws Exception {
         logger.info("deleteSeed(" + seedEntity.getIdSeed() + ")");
@@ -76,9 +79,6 @@ public class SeedDao implements ISeedDao {
             if(!entityManager.contains(seedEntity)){
                 seedEntity = entityManager.merge(seedEntity);
             }
-//            else{
-//                seedEntity = entityManager.find(SeedEntity.class, seedEntity.getIdSeed());
-//            }
             entityManager.remove(seedEntity);
             entityTransaction.commit();
         }
