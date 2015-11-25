@@ -13,6 +13,20 @@
         <location>/error404.html</location>
     </error-page>
 
+    <!-- Depending on allowCORS parameter, sets headers to allow CORS requests -->
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>it.wirge.rest.CorsFilter</filter-class>
+        <init-param>
+            <param-name>allowCORS</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
 <!--
     <servlet>
         <servlet-name>jersey-servlet</servlet-name>
