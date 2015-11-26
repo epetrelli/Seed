@@ -1,24 +1,30 @@
 var gulp = require('gulp');
-var connect = require('gulp-connect');
+var gls = require('gulp-live-server');
+var typescript = require('gulp-tsc');
 
-var src = './src/main/webapp';
-var filesToReload = src + '/**/*.{html,js,css}';
+var DEV_DIR  = './src/main/webapp/';
+var TEMP_DIR = './target/tmp/'; // working on it dir
+var DIST_DIR = './target/seed-1.0-SNAPSHOT-connect/';
 
-gulp.task('connect', function() {
-    connect.server({
-        root: src,
-        livereload: true,
-        port:8081
+var server = gls.static(DEV_DIR, 8081);
+
+gulp.task('default', ['compile'], function() {
+
+    server.start();
+    console.log("serving")
+
+    //use gulp.watch to trigger server actions(notify, start or stop)
+    gulp.watch([DEV_DIR + '**/*.css', DEV_DIR + '**/*.html'], function (file) {
+        server.notify.apply(server, [file]);
     });
+    console.log("watching")
 });
 
-gulp.task('reload', function () {
-    gulp.src(filesToReload)
-        .pipe(connect.reload());
+gulp.task('compile', function() {
+    console.log("compiled...");
+    gulp.src([DEV_DIR + '**/*.ts'])
+        .pipe(typescript())
+        .pipe(gulp.dest(DIST_DIR))
 });
 
-gulp.task('watch', function () {
-    gulp.watch([filesToReload], ['reload']);
-});
 
-gulp.task('default', ['connect', 'watch']);
