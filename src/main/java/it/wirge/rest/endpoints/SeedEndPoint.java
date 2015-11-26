@@ -28,7 +28,7 @@ public class SeedEndPoint {
 
     @GET
     @Path(value = "{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("application/vnd.bean-v1+json")
     @ApiOperation(value = "Finds a Seed by id", response = Seed.class)
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = "Seed not found"),
@@ -71,8 +71,8 @@ public class SeedEndPoint {
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/vnd.bean-v1+json")
+    @Produces("application/vnd.bean-v1+json")
     @ApiOperation(value = "Creates a new Seed", response = Seed.class)
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = "Seed not found"),
@@ -91,8 +91,8 @@ public class SeedEndPoint {
     }
 
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/vnd.bean-v1+json")
+    @Produces("application/vnd.bean-v1+json")
     @ApiOperation(value = "Saves a new seed", response = Seed.class)
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = "Seed not found"),

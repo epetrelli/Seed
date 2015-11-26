@@ -4,21 +4,15 @@
   "description": "A Maven project for a restful java webapplication, using Jersey 2, Hibernate 4, and agnostic about the servlet container (tested on jetty and Tomcat)",
   "main": "Gulpfile.js",
   "dependencies": {
-    "angular2": "2.0.0-alpha.44",
-    "systemjs": "0.19.2"
+
   },
   "devDependencies": {
     "bower": "^1.6.6",
     "gulp": "^3.9.0",
     "gulp-live-server": "0.0.29",
-    "gulp-tsc": "^1.1.4",
-    "live-server": "^0.8.2",
-    "typescript": "^1.6.2"
+    "live-server": "^0.8.2"
   },
   "scripts": {
-    //"test": "echo \"Error: no test specified\" && exit 1",
-    //"tsc": "tsc -p src/main/webapp -w",
-    //"start": "live-server --open=src/main/webapp"
   },
   "repository": {
     "type": "git",

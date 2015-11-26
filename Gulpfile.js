@@ -1,30 +1,26 @@
 var gulp = require('gulp');
 var gls = require('gulp-live-server');
-var typescript = require('gulp-tsc');
 
 var DEV_DIR  = './src/main/webapp/';
-var TEMP_DIR = './target/tmp/'; // working on it dir
-var DIST_DIR = './target/seed-1.0-SNAPSHOT-connect/';
+var PUBLISH_PORT = 8082;
 
-var server = gls.static(DEV_DIR, 8081);
+var server;
 
-gulp.task('default', ['compile'], function() {
+gulp.task('default', ['serve_dev']);
 
+gulp.task('serve_dev', function() {
+    server = gls.static(DEV_DIR, PUBLISH_PORT);
     server.start();
-    console.log("serving")
+    console.log("Serving folder " + DEV_DIR + " on port " + PUBLISH_PORT + ".");
 
-    //use gulp.watch to trigger server actions(notify, start or stop)
     gulp.watch([DEV_DIR + '**/*.css', DEV_DIR + '**/*.html'], function (file) {
         server.notify.apply(server, [file]);
+        console.log("Changes applied");
     });
-    console.log("watching")
-});
-
-gulp.task('compile', function() {
-    console.log("compiled...");
-    gulp.src([DEV_DIR + '**/*.ts'])
-        .pipe(typescript())
-        .pipe(gulp.dest(DIST_DIR))
+    console.log("Watching...")
 });
 
 
+gulp.task('dist', function() {
+
+});

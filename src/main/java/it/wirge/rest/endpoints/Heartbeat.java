@@ -7,7 +7,6 @@ import it.wirge.rest.models.Beat;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
 @Path("/heartbeat")
@@ -17,7 +16,7 @@ public class Heartbeat {
     Logger logger = Logger.getLogger(this.getClass().getName());
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("application/vnd.beat-v1+json")
     @ApiOperation(value = "Returns a beat containing current server time", response = Beat.class)
     public Beat getHeartbeat() {
         logger.info("getHeartbeat()");
