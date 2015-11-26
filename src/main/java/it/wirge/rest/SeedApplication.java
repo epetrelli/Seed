@@ -2,6 +2,7 @@ package it.wirge.rest;
 
 import io.swagger.jaxrs.config.BeanConfig;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.ws.rs.ApplicationPath;
 import java.util.HashSet;
@@ -11,6 +12,8 @@ import java.util.Set;
 public class SeedApplication extends ResourceConfig {
 
     public SeedApplication(){
+
+        register(RolesAllowedDynamicFeature.class);
 
         register(new SeedApplicationBinder());
         packages("it.wirge.rest.endpoints");
